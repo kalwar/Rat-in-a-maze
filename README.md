@@ -23,6 +23,6 @@ Setup your development environment as follows:
     Open http://localhost:3000 to view it in the browser.
     The page will reload if you make edits.
 
-## Use for references only
+## Use for references
 
-Use this Rat in a Maze app as a references material for Data Structures. 
+Use this Rat-in-a-Maze app as a references material only. 
