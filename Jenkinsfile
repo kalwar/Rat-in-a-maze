@@ -11,13 +11,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh "chmod +x -R ${env.WORKSPACE}"
+                sh "chmod +x -R ./scripts/"
                 sh './scripts/test.sh'
             }
         }
         stage('Deliver') {
             steps {
-                sh "chmod +x -R ${env.WORKSPACE}"
+                sh "chmod +x -R ./scripts/"
                 sh './scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './scripts/kill.sh'
