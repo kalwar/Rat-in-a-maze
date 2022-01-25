@@ -11,14 +11,16 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'sudo ./scripts/test.sh'
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './scripts/test.sh'
             }
         }
         stage('Deliver') {
             steps {
-                sh 'sudo ./scripts/deliver.sh'
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'sudo ./scripts/kill.sh'
+                sh './scripts/kill.sh'
             }
         }
     }
