@@ -17,8 +17,8 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh "chmod +x -R ./scripts/"
-                sh './scripts/kill.sh'
+                sh "sudo rm -rf /var/jenkins_home/ratinmazeapp"
+                sh "sudo cp -r ${WORKSPACE}/build/ /var/jenkins_home/ratinmazeapp"
             }
         }
     }
