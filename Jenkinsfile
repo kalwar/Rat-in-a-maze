@@ -1,36 +1,46 @@
-pipeline{
+pipeline {
 
-	agent any
+  agent any
 
-  
-stages {
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('kalwar-dockerhub')
+  }
 
-		stage('Build') {
+  stages {
 
-			steps {
-				sh 'docker build -t kalwar/rateinmaze:latest .'
-			}
-		}
+    stage('Checkout SCM') {
 
-		stage('Login') {
+      steps {
+        git 'https://github.com/kalwar/Rat-in-a-maze.git'
+      }
+    }
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
+    stage('Build') {
 
-		stage('Push') {
+      steps {
+        sh 'docker build -t kalwar/ratinmaze:latest .'
+      }
+    }
 
-			steps {
-				sh 'docker push kalwar/ratinmaze:latest'
-			}
-		}
-	}
+    stage('Login') {
 
-	post {
-		always {
-			sh 'docker logout'
-		}
-	}
-  
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+
+    stage('Push') {
+
+      steps {
+        sh 'docker push kalwar/ratinmaze:latest'
+      }
+    }
+  }
+
+  post {
+    always {
+      sh 'docker logout'
+    }
+  }
+
 }
