@@ -3,17 +3,10 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('kalwar-dockerhub')
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
   }
 
   stages {
-
-    stage('Checkout SCM') {
-
-      steps {
-        git 'https://github.com/kalwar/Rat-in-a-maze.git'
-      }
-    }
 
     stage('Build') {
 
